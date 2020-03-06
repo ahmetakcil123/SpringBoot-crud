@@ -21,7 +21,7 @@ public class DeviceManagerService {
 
     public Device save(Device device)
     {
-        LOGGER.info("Device saved => {}", device);
+        LOGGER.info("Device saved test git => {}", device);
         return deviceRepository.save(device);
     }
 
