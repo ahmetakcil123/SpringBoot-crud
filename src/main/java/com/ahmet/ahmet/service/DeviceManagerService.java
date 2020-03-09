@@ -19,10 +19,11 @@ public class DeviceManagerService {
 
 
 
-    public void save(Device device)  {
+    public Device save(Device device)
+    {
         LOGGER.info("Device saved => {}", device);
-        Device inDB = deviceRepository.findByName(device.getName());
 
+        return deviceRepository.save(device);
     }
 
    @Transactional

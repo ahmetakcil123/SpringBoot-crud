@@ -1,5 +1,6 @@
 package com.ahmet.ahmet.device;
 
+import com.ahmet.ahmet.configuration.anotation.UniqueName;
 import lombok.Data;
 
 import org.springframework.data.annotation.Id;
@@ -16,7 +17,7 @@ public class Device {
 
     @NotNull(message = "Name may be not null!!!")
     @Size(min = 4,max = 20,message = "Size must be between min 4 and max 20 characters!")
-
+    @UniqueName(message = "This name has been previously registered. Use another name!")
     private String name;
 
     @NotNull(message = "Description may be not null!!!")
