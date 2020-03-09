@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface DeviceRepository extends MongoRepository<Device, String> {
 
+
     Device findByName(String name);
 
     void deleteById(String id);
