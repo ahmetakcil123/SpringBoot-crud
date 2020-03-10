@@ -6,6 +6,7 @@ import com.ahmet.ahmet.device.GenericResponse;
 import com.ahmet.ahmet.vm.DeviceVm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class DeviceManagerController {
@@ -28,7 +30,6 @@ public class DeviceManagerController {
 
     @PostMapping("/api/1.0/device")
     GenericResponse createDevice(@Valid  @RequestBody Device device){
-
 
         deviceManagerService.save(device);
         return new GenericResponse("Device Saved");
@@ -43,6 +44,7 @@ public class DeviceManagerController {
     @GetMapping("/api/1.0/device/getAll")
     @ResponseBody
     public List<Device> getAllDevice ( ){
+
         List<Device> deviceResponse = (List<Device>) deviceManagerService.getAllDevice();
         return deviceResponse;
     }
@@ -65,7 +67,12 @@ public class DeviceManagerController {
     public void deleteAllDevices() {
         deviceManagerService.deleteAllDevice();
     }
+    
+    @PutMapping("api/1.0/device")
+    public ResponseEntity<?> updateDevice(@Valid @RequestBody Device device) {
 
+        return new ResponseEntity<>(deviceManagerService.update(device), HttpStatus.OK);
+    }
 
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
